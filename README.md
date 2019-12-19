@@ -1,17 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# LAGOSNEgis
+# LAGOSUSgis
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/LAGOSNEgis)](https://cran.r-project.org/package=LAGOSNEgis)
+status](https://www.r-pkg.org/badges/version/LAGOSUSgis)](https://cran.r-project.org/package=LAGOSUSgis)
 [![Travis build
-status](https://travis-ci.org/jsta/LAGOSNEgis.svg?branch=master)](https://travis-ci.org/jsta/LAGOSNEgis)
+status](https://travis-ci.org/jsta/LAGOSUSgis.svg?branch=master)](https://travis-ci.org/jsta/LAGOSUSgis)
 [![DOI](https://zenodo.org/badge/106293356.svg)](https://zenodo.org/badge/latestdoi/106293356)
 
-Extra functions to interact with the GIS module of LAGOSNE.
+Extra functions to interact with the GIS module of LAGOSUS.
 
 ## Features
 
@@ -27,26 +27,22 @@ Extra functions to interact with the GIS module of LAGOSNE.
 ## Installation
 
 ``` r
-remotes::install_github("jsta/LAGOSNEgis")
+remotes::install_github("jsta/LAGOSUSgis")
 ```
 
 ## Usage
 
 ``` r
-library(LAGOSNEgis)
+library(LAGOSUSgis)
 ```
 
 ### Download data
-
-``` r
-lagosnegis_get()
-```
 
 ### List available GIS layers
 
 ``` r
 library(sf)
-sf::st_layers(LAGOSNEgis:::lagosnegis_path())
+sf::st_layers(LAGOSUSgis:::lagosusgis_path())
 ```
 
 ### Query from a specfic layer
