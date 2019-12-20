@@ -2,7 +2,7 @@
 
 export(gh_file)
 export(lagosnegis_get)
-export(lagosnegis_path)
+export(lagosusgis_path)
 export(load_xwalk)
 export(query_gis)
 export(query_gis_)
