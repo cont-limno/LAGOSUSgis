@@ -78,7 +78,7 @@ res <- query_wbd(lagoslakeid = c(7010))
 ### Flexible queries using `SQL` statements
 
 ```{r eval=FALSE}
-res <- query_gis_(query = "SELECT * FROM ws WHERE lagoslakeid IN ('7010');")
+res <- query_gis_(query = "SELECT * FROM ws WHERE lagoslakeid IN ('7010')")
 ```
 
 ## References

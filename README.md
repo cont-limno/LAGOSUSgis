@@ -42,17 +42,17 @@ library(LAGOSUSgis)
 
 ``` r
 library(sf)
-sf::st_layers(LAGOSUSgis:::lagosusgis_path())
+sf::st_layers(LAGOSUSgis::lagosusgis_path())
 ```
 
 ### Query from a specfic layer
 
 ``` r
-res_iws  <- query_gis(layer = "IWS", 
+res_iws  <- query_gis(layer = "ws", 
                       id_name = "lagoslakeid", ids = c(34352))
-res_lake <- query_gis(layer = "LAGOS_NE_All_Lakes_4ha", 
+res_lake <- query_gis(layer = "LAGOS_US_All_Lakes_1ha", 
                       id_name = "lagoslakeid", ids = 34352)
-res_pnt  <- query_gis(layer = "LAGOS_NE_All_Lakes_4ha_POINTS", 
+res_pnt  <- query_gis(layer = "LAGOS_US_All_Lakes_1ha_POINTS", 
                       id_name = "lagoslakeid", ids = 34352)
 ```
 
@@ -65,7 +65,7 @@ res <- query_wbd(lagoslakeid = c(7010))
 ### Flexible queries using `SQL` statements
 
 ``` r
-res <- query_gis_(query = "SELECT * FROM IWS WHERE lagoslakeid IN ('7010');")
+res <- query_gis_(query = "SELECT * FROM ws WHERE lagoslakeid IN ('7010')")
 ```
 
 ## References

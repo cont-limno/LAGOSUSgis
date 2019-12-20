@@ -147,8 +147,8 @@ query_gis_ <- function(gis_path = lagosusgis_path(), query, crs = albers_conic()
 query_wbd <- memoise::memoise(function(lagoslakeid, gis_path = lagosusgis_path(),
                       crs = albers_conic(), utm = FALSE){
 
-  iws           <- query_gis("IWS", "lagoslakeid", lagoslakeid)
-  lake_boundary <- query_gis("LAGOS_NE_All_Lakes_4ha", "lagoslakeid", lagoslakeid)
+  iws           <- query_gis("ws", "lagoslakeid", lagoslakeid)
+  lake_boundary <- query_gis("LAGOS_US_All_Lakes_1ha", "lagoslakeid", lagoslakeid)
 
   res <- lapply(seq_len(nrow(iws)), function(x) {
           iws_dissolve  <- st_buffer(do.call(c, st_geometry(iws)[x]), 0)
