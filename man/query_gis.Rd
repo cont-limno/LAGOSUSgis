@@ -30,26 +30,26 @@ Query LAGOS GIS
 \dontrun{
 
 library(sf)
-st_layers(lagosnegis_path())
+st_layers(lagosusgis_path())
 
 library(gdalUtils)
-ogrinfo(lagosnegis_path(), "HU12", so = TRUE)
+ogrinfo(lagosusgis_path(), "hu12", so = TRUE)
 
-states   <- query_gis("STATE")
+states   <- query_gis("state")
 
 library(mapview)
-state    <- query_gis("STATE", "State_Name", "Michigan")
-res_iws  <- query_gis("IWS", "lagoslakeid", c(34352))
-res_lake <- query_gis("LAGOS_NE_All_Lakes_4ha", "lagoslakeid", 34352)
-res_pnt  <- query_gis("LAGOS_NE_All_Lakes_4ha_POINTS", "lagoslakeid", 34352)
+state    <- query_gis("state", "state_name", "Michigan")
+res_iws  <- query_gis("ws", "lagoslakeid", c(34352))
+res_lake <- query_gis("LAGOS_US_All_Lakes_1ha", "lagoslakeid", 34352)
+res_pnt  <- query_gis("LAGOS_US_All_Lakes_1ha_points", "lagoslakeid", 34352)
 mapview(state) + mapview(res_iws) + mapview(res_lake) + mapview(res_pnt)
 
-res <- query_gis("IWS", "lagoslakeid", c(7010))
-res <- query_gis("HU12", "ZoneID", c("HU12_1"))
-res <- query_gis("HU8", "ZoneID", c("HU8_100"))
-res <- query_gis("HU4", "ZoneID", c("HU4_5"))
+res <- query_gis("ws", "lagoslakeid", c(7010))
+res <- query_gis("hu12", "hu12_zoneid", c("hu12_1"))
+res <- query_gis("hu8", "hu8_zoneid", c("hu8_100"))
+res <- query_gis("hu4", "hu4_zoneid", c("hu4_5"))
 
 # query multiple feature ids
-res <- query_gis("IWS", "lagoslakeid", c(7010, 1))
+res <- query_gis("ws", "lagoslakeid", c(7010, 1))
 }
 }
