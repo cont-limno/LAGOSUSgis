@@ -4,7 +4,7 @@
 \alias{lagosnegis_get}
 \title{Get LAGOSNEgis data}
 \usage{
-lagosnegis_get(dest_folder = lagosnegis_dir(), overwrite = FALSE)
+lagosnegis_get(dest_folder = lagosusgis_dir(), overwrite = FALSE)
 }
 \arguments{
 \item{dest_folder}{file.path defaults to lagosnegis_path()}

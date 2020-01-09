@@ -4,8 +4,9 @@
   }
 }
 
-.onLoad <- function(pkgname, libname) {
+.onLoad <- function(libname, pkgname) {
   query_wbd  <<- memoise::memoise(query_wbd)
   query_gis  <<- memoise::memoise(query_gis)
   query_gis_ <<- memoise::memoise(query_gis_)
+  query_lake_poly <<- memoise::memoise(query_lake_poly)
 }

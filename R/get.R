@@ -2,7 +2,6 @@
 #'
 #' Get data from the GIS module of LAGOSNE
 #'
-#' @export
 #' @importFrom utils unzip download.file
 #' @importFrom gdalUtilities ogr2ogr
 #' @param dest_folder file.path defaults to lagosnegis_path()
@@ -17,7 +16,7 @@
 #' @examples \dontrun{
 #' lagosnegis_get()
 #' }
-lagosnegis_get <- function(dest_folder = lagosnegis_dir(), overwrite = FALSE){
+lagosnegis_get <- function(dest_folder = lagosusgis_dir(), overwrite = FALSE){
   # dest_folder <- LAGOSNEgis:::lagosnegis_path()
   outpath <- file.path(dest_folder, "lagos-ne_gis.gpkg")
   dest_gdb <- file.path(dest_folder, "LAGOS_NE_GIS_Data_v1.0.gdb")

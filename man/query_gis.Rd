@@ -19,9 +19,9 @@ query_gis(
 
 \item{ids}{feature ids to select}
 
-\item{crs}{character projection info defaults to lagosnegis_path()}
+\item{crs}{character projection info defaults to lagosusgis_path()}
 
-\item{gis_path}{character path to LAGOSNE GIS gpkg}
+\item{gis_path}{character path to LAGOSUS GIS gpkg}
 }
 \description{
 Query LAGOS GIS

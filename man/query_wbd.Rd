@@ -14,7 +14,7 @@ query_wbd(
 \arguments{
 \item{lagoslakeid}{numeric}
 
-\item{gis_path}{file.path to LAGOSNE GIS gpkg}
+\item{gis_path}{file.path to LAGOSUS GIS gpkg}
 
 \item{crs}{projection string or epsg code}
 

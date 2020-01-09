@@ -1,10 +1,10 @@
 ---
-title: "Using LAGOSNEgis"
+title: "Using LAGOSUSgis"
 author: "Joseph Stachelek"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using LAGOSNEgis}
+  %\VignetteIndexEntry{Using LAGOSUSgis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,13 +17,13 @@ knitr::opts_chunk$set(
 ```
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-library(LAGOSNEgis)
+library(LAGOSUSgis)
 library(sf)
 library(ggplot2)
 
-res_iws  <- query_gis("IWS", "lagoslakeid", c(34352))
-res_lake <- query_gis("LAGOS_NE_All_Lakes_4ha", "lagoslakeid", 34352)
-res_pnt  <- query_gis("LAGOS_NE_All_Lakes_4ha_POINTS", "lagoslakeid", 34352)
+res_iws  <- query_gis("ws", "lagoslakeid", c(34352))
+res_lake <- query_gis("LAGOS_US_All_Lakes_1ha", "lagoslakeid", 34352)
+res_pnt  <- query_gis("LAGOS_US_All_Lakes_1ha_POINTS", "lagoslakeid", 34352)
 
 ggplot() + 
   geom_sf(data = res_iws, color = "darkgreen") + 
@@ -32,7 +32,7 @@ ggplot() +
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(LAGOSNEgis)
+library(LAGOSUSgis)
 library(sf)
 library(ggplot2)
 

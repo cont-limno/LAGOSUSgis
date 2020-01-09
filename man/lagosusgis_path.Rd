@@ -2,10 +2,10 @@
 % Please edit documentation in R/utils.R
 \name{lagosusgis_path}
 \alias{lagosusgis_path}
-\title{Get the path to LAGOSNEgis data}
+\title{Get the path to LAGOSUSgis data}
 \usage{
 lagosusgis_path()
 }
 \description{
-Get the path to LAGOSNEgis data
+Get the path to LAGOSUSgis data
 }
