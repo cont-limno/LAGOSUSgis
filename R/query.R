@@ -35,7 +35,7 @@
 #' # query multiple feature ids
 #' res <- query_gis("ws", "lagoslakeid", c(7010, 1))
 #' }
-query_gis <- memoise::memoise(function(layer, id_name = NULL, ids = NULL,
+query_gis <- function(layer, id_name = NULL, ids = NULL,
                                        crs = albers_conic(),
                                        gis_path = lagosusgis_path()){
 
@@ -57,7 +57,7 @@ query_gis <- memoise::memoise(function(layer, id_name = NULL, ids = NULL,
   }
 
   res
-})
+}
 
 #' Raw (non-vectorized) query of LAGOS GIS
 #'
@@ -144,7 +144,7 @@ query_gis_ <- function(gis_path = lagosusgis_path(), query, crs = albers_conic()
 #' mapview::mapview(res)
 #'
 #' }
-query_wbd <- memoise::memoise(function(lagoslakeid, gis_path = lagosusgis_path(),
+query_wbd <- function(lagoslakeid, gis_path = lagosusgis_path(),
                       crs = albers_conic(), utm = FALSE){
 
   iws           <- query_gis("ws", "lagoslakeid", lagoslakeid)
@@ -166,4 +166,4 @@ query_wbd <- memoise::memoise(function(lagoslakeid, gis_path = lagosusgis_path()
   }else{
     iws
   }
-})
+}
