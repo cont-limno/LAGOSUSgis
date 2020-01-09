@@ -5,6 +5,7 @@
 }
 
 .onLoad <- function(pkgname, libname) {
-  query_wbd <<- memoise::memoise(query_wbd)
-  query_gis <<- memoise::memoise(query_gis)
+  query_wbd  <<- memoise::memoise(query_wbd)
+  query_gis  <<- memoise::memoise(query_gis)
+  query_gis_ <<- memoise::memoise(query_gis_)
 }
