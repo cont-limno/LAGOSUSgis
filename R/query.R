@@ -3,8 +3,8 @@
 #' @param layer character layer name
 #' @param id_name selection column
 #' @param ids feature ids to select
-#' @param crs character projection info defaults to lagosnegis_path()
-#' @param gis_path character path to LAGOSNE GIS gpkg
+#' @param crs character projection info defaults to lagosusgis_path()
+#' @param gis_path character path to LAGOSUS GIS gpkg
 #'
 #' @importFrom sf st_geometry st_geometry_type st_cast
 #' @importFrom memoise memoise
@@ -92,7 +92,7 @@ query_gis_ <- function(gis_path = lagosusgis_path(), query, crs = albers_conic()
   # investigate specific layers
   # library(sf)
   # library(vapour)
-  # crs <- LAGOSNEgis:::albers_conic()
+  # crs <- LAGOSUSgis:::albers_conic()
   # gis_path <- "/home/jose/.local/share/LAGOS-GIS/lagos-ne_gis.gpkg"
   # st_layers(gis_path)
   # query <- "SELECT * FROM HU4 LIMIT 1"
@@ -124,7 +124,7 @@ query_gis_ <- function(gis_path = lagosusgis_path(), query, crs = albers_conic()
 #' Query watershed boundary for LAGOS lakes
 #'
 #' @param lagoslakeid numeric
-#' @param gis_path file.path to LAGOSNE GIS gpkg
+#' @param gis_path file.path to LAGOSUS GIS gpkg
 #' @param crs projection string or epsg code
 #' @param utm logical convert crs to utm
 #'
@@ -165,5 +165,29 @@ query_wbd <- function(lagoslakeid, gis_path = lagosusgis_path(),
     toUTM(iws)
   }else{
     iws
+  }
+}
+
+#' Query polygon outline for LAGOS lakes
+#'
+#' @param lagoslakeid numeric
+#' @param gis_path file.path to LAGOSUS GIS gpkg
+#' @param crs projection string or epsg code
+#' @param utm logical convert crs to utm
+#'
+#' @export
+#'
+#' @examples \dontrun{
+#' res <- query_lake_poly(c(474805, 474803))
+#' }
+query_lake_poly <- function(lagoslakeid, gis_path = lagosusgis_path(),
+                      crs = albers_conic(), utm = FALSE){
+
+  res <- query_gis("LAGOS_US_All_Lakes_1ha", "lagoslakeid", lagoslakeid)
+
+  if(utm){
+    toUTM(res)
+  }else{
+    res
   }
 }
