@@ -46,6 +46,8 @@ library(LAGOSUSgis)
 lagosusgis_get()
 ```
 
+Until data is posted publicly, place the `LAGOSUSgis` geodatabase file in the location returned by `lagosusgis_path()`
+
 ### List available GIS layers
 
 ```{r eval=FALSE}
@@ -53,9 +55,18 @@ library(sf)
 sf::st_layers(LAGOSUSgis::lagosusgis_path())
 ```
 
-```{r eval = FALSE, echo=FALSE}
+```{r eval = TRUE, echo=FALSE}
+library(details)
 ly <- sf::st_layers(LAGOSUSgis:::lagosusgis_path())
-knitr::kable(data.frame(ly[c("name", "driver", "features", "fields")]))
+details(
+knitr::kable(data.frame(ly[c("name", "driver", "features", "fields")])), 
+summary = "layers")
+```
+
+### Query a lake polygon
+
+```{r eval=FALSE}
+res_lake <- query_lake_poly(34352)
 ```
 
 ### Query from a specfic layer
@@ -79,6 +90,7 @@ res <- query_wbd(lagoslakeid = c(7010))
 
 ```{r eval=FALSE}
 res <- query_gis_(query = "SELECT * FROM ws WHERE lagoslakeid IN ('7010')")
+res <- query_gis_(query = paste0("SELECT * FROM LAGOS_US_All_Lakes_1ha_points WHERE lake_centroidstate LIKE '", "RI", "' AND lake_totalarea_ha > 4"))
 ```
 
 ## References

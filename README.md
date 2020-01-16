@@ -38,11 +38,73 @@ library(LAGOSUSgis)
 
 ### Download data
 
+Until data is posted publicly, place the `LAGOSUSgis` geodatabase file
+in the location returned by `lagosusgis_path()`
+
 ### List available GIS layers
 
 ``` r
 library(sf)
 sf::st_layers(LAGOSUSgis::lagosusgis_path())
+```
+
+<details closed>
+
+<summary> <span title="Click to Expand"> layers </span> </summary>
+
+``` r
+
+
+
+name                                    driver         features   fields
+--------------------------------------  ------------  ---------  -------
+TIGER_Coastline                         OpenFileGDB        4245        3
+LAGOS_US_All_Lakes_1ha_No_Islands       OpenFileGDB      479950       50
+US_Box                                  OpenFileGDB           1        2
+County_Coastline                        OpenFileGDB        5756       19
+Derived_Land_Borders                    OpenFileGDB           7        3
+US_Countybased_Clip_Polygon             OpenFileGDB           1        3
+simple_bailey                           OpenFileGDB         165       17
+simple_mlra                             OpenFileGDB         226       16
+simple_wwf                              OpenFileGDB          44       14
+simple_state                            OpenFileGDB          49       17
+simple_hu4                              OpenFileGDB         202       15
+simple_hu8                              OpenFileGDB        2105       15
+simple_county                           OpenFileGDB        3106       18
+simple_neon                             OpenFileGDB          17       14
+LAGOS_US_All_Lakes_1ha_AUSTIN20190521   OpenFileGDB      479950       21
+NHD_Combined_Regions                    OpenFileGDB           1        2
+state                                   OpenFileGDB          49       20
+bailey                                  OpenFileGDB         165       27
+mlra                                    OpenFileGDB         226       24
+neon                                    OpenFileGDB          17       22
+wwf                                     OpenFileGDB          44       22
+hu12                                    OpenFileGDB       83108       18
+hu8                                     OpenFileGDB        2105       18
+hu4                                     OpenFileGDB         202       19
+county                                  OpenFileGDB        3106       24
+buff100                                 OpenFileGDB      479950       49
+buff500                                 OpenFileGDB      479950       49
+omernik3                                OpenFileGDB          87       22
+epanutr                                 OpenFileGDB           9       13
+LAGOS_US_All_Lakes_1ha                  OpenFileGDB      479950       74
+LAGOS_US_All_Lakes_1ha_points           OpenFileGDB      479950       70
+nws                                     OpenFileGDB       27069       27
+ws                                      OpenFileGDB      478304       30
+LAGOS_limno_linked_merged_20191118      OpenFileGDB       81618       15
+simple_hu12                             OpenFileGDB       83108       16
+simple_epanutr                          OpenFileGDB           9       13
+simple_omernik3                         OpenFileGDB          87       22
+```
+
+</details>
+
+<br>
+
+### Query a lake polygon
+
+``` r
+res_lake <- query_lake_poly(34352)
 ```
 
 ### Query from a specfic layer
@@ -66,6 +128,7 @@ res <- query_wbd(lagoslakeid = c(7010))
 
 ``` r
 res <- query_gis_(query = "SELECT * FROM ws WHERE lagoslakeid IN ('7010')")
+res <- query_gis_(query = paste0("SELECT * FROM LAGOS_US_All_Lakes_1ha_points WHERE lake_centroidstate LIKE '", "RI", "' AND lake_totalarea_ha > 4"))
 ```
 
 ## References
