@@ -7,7 +7,7 @@ albers_conic <- function(){
 #'
 #' @export
 lagosusgis_path <- function(){
-  file.path(rappdirs::user_data_dir("LAGOS-GIS"), "LAGOS_US_GIS_Data_v0.6.gdb")
+  file.path(rappdirs::user_data_dir("LAGOS-GIS"), "LAGOS_US_GIS_Data_v0.7.gdb")
 }
 
 lagosusgis_dir <- function(){
