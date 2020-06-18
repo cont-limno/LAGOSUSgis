@@ -32,6 +32,7 @@ Suggests:
     leaflet,
     magrittr,
     ggplot2,
-    gdalUtils
+    gdalUtils,
+    details
 VignetteBuilder: knitr
 Language: en-US
