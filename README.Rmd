@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 
 # LAGOSUSgis
 
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![CRAN status](https://www.r-pkg.org/badges/version/LAGOSUSgis)](https://cran.r-project.org/package=LAGOSUSgis) [![Travis build status](https://travis-ci.org/jsta/LAGOSUSgis.svg?branch=master)](https://travis-ci.org/jsta/LAGOSUSgis) [![DOI](https://zenodo.org/badge/106293356.svg)](https://zenodo.org/badge/latestdoi/106293356)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![CRAN status](https://www.r-pkg.org/badges/version/LAGOSUSgis)](https://cran.r-project.org/package=LAGOSUSgis) [![Travis build status](https://travis-ci.org/cont-limno/LAGOSUSgis.svg?branch=master)](https://travis-ci.org/cont-limno/LAGOSUSgis) [![DOI](https://zenodo.org/badge/106293356.svg)](https://zenodo.org/badge/latestdoi/106293356)
 
 
 
@@ -31,7 +31,7 @@ Extra functions to interact with the GIS module of LAGOSUS.
 ## Installation
 
 ```{r eval=FALSE}
-remotes::install_github("jsta/LAGOSUSgis")
+remotes::install_github("cont-limno/LAGOSUSgis")
 ```
 
 ## Usage
@@ -43,7 +43,7 @@ library(LAGOSUSgis)
 ### Download data
 
 ```{r eval=FALSE, echo=FALSE}
-lagosusgis_get()
+# lagosusgis_get()
 ```
 
 Until data is posted publicly, place the `LAGOSUSgis` geodatabase file in the location returned by `lagosusgis_path()`
