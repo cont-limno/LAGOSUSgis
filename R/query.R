@@ -73,16 +73,16 @@ query_gis <- function(layer, id_name = NULL, ids = NULL,
 #' @export
 #'
 #' @examples \dontrun{
-#' res <- query_gis_(query = "SELECT * FROM IWS WHERE lagoslakeid IN ('7010');")
+#' res <- query_gis_(query = "SELECT * FROM ws WHERE lagoslakeid IN ('7010')")
 #'
 #' # query nested hucs
-#' hu4  <- query_gis("HU4", "ZoneID", c("HU4_5"))
-#' hu8s <- query_gis_(query = "SELECT * FROM HU8 WHERE HUC8 LIKE '0415%';")
+#' hu4  <- query_gis("hu4", "hu4_huc4", c("0415"))
+#' hu8s <- query_gis_(query = "SELECT * FROM hu8 WHERE hu8_huc8 LIKE '0415%'")
 #'
 #' # query multiple nested hucs
-#' hu4s  <- query_gis("HU4", "ZoneID", c("HU4_5", "HU4_6"))
-#' hu8s  <- query_gis_(query = paste0("SELECT * FROM HU8 WHERE ",
-#'             paste0("HUC8 LIKE '", hu4s$HUC4, "%'", collapse = " OR ")))
+#' hu4s  <- query_gis("hu4", "hu4_huc4", c("0415", "0414"))
+#' hu8s  <- query_gis_(query = paste0("SELECT * FROM hu8 WHERE ",
+#'             paste0("hu8_huc8 LIKE '", hu4s$hu4_huc4, "%'", collapse = " OR ")))
 #' }
 #'
 query_gis_ <- function(gis_path = lagosusgis_path(), query, crs = albers_conic()){
@@ -95,7 +95,7 @@ query_gis_ <- function(gis_path = lagosusgis_path(), query, crs = albers_conic()
   # crs <- LAGOSUSgis:::albers_conic()
   # gis_path <- "/home/jose/.local/share/LAGOS-GIS/lagos-ne_gis.gpkg"
   # st_layers(gis_path)
-  # query <- "SELECT * FROM HU4 LIMIT 1"
+  # query <- "SELECT * FROM hu4 LIMIT 1"
   # as.data.frame(vapour_read_attributes(gis_path, sql = query),
   #                      stringsAsFactors = FALSE)
 
@@ -108,8 +108,8 @@ query_gis_ <- function(gis_path = lagosusgis_path(), query, crs = albers_conic()
   dat <- as.data.frame(vapour_read_attributes(gis_path, sql = query),
                        stringsAsFactors = FALSE)
   dat <- dplyr::mutate(dat,
-                         wkt = vapour_read_geometry_text(gis_path,
-                                                       sql = query, textformat = "wkt"))
+                         wkt = vapour_read_geometry_text(
+                           gis_path, sql = query, textformat = "wkt"))
   sf::st_geometry(dat) <- sf::st_as_sfc(dat$wkt)
   dat                  <- dplyr::select(dat, -.data$wkt)
   sf::st_crs(dat)      <- sf::st_crs(crs)
