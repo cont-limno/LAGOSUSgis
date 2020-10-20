@@ -8,6 +8,7 @@ query_gis(
   layer,
   id_name = NULL,
   ids = NULL,
+  extent = NA,
   crs = albers_conic(),
   gis_path = lagosusgis_path()
 )
@@ -19,6 +20,8 @@ query_gis(
 
 \item{ids}{feature ids to select}
 
+\item{extent}{apply an arbitrary extent using an sf bbox}
+
 \item{crs}{character projection info defaults to lagosusgis_path()}
 
 \item{gis_path}{character path to LAGOSUS GIS gpkg}
@@ -29,11 +32,8 @@ Query LAGOS GIS
 \examples{
 \dontrun{
 
-library(sf)
-st_layers(lagosusgis_path())
-
-library(gdalUtils)
-ogrinfo(lagosusgis_path(), "hu12", so = TRUE)
+sf::st_layers(lagosusgis_path())
+gdalUtils::ogrinfo(lagosusgis_path(), "hu12", so = TRUE)
 
 states   <- query_gis("state")
 
@@ -51,5 +51,12 @@ res <- query_gis("hu4", "hu4_zoneid", c("hu4_5"))
 
 # query multiple feature ids
 res <- query_gis("ws", "lagoslakeid", c(7010, 1))
+
+# query lake polygon from coordinates using extent argument
+lake_coordinates <- query_gis("LAGOS_US_All_Lakes_1ha_points",
+                              "lagoslakeid", "1")
+
+lake_polygon <- query_gis("LAGOS_US_All_Lakes_1ha",
+                          extent = sf::st_bbox(lake_coordinates))
 }
 }

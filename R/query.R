@@ -3,6 +3,7 @@
 #' @param layer character layer name
 #' @param id_name selection column
 #' @param ids feature ids to select
+#' @param extent apply an arbitrary extent using an sf bbox
 #' @param crs character projection info defaults to lagosusgis_path()
 #' @param gis_path character path to LAGOSUS GIS gpkg
 #'
@@ -12,11 +13,8 @@
 #'
 #' @examples \dontrun{
 #'
-#' library(sf)
-#' st_layers(lagosusgis_path())
-#'
-#' library(gdalUtils)
-#' ogrinfo(lagosusgis_path(), "hu12", so = TRUE)
+#' sf::st_layers(lagosusgis_path())
+#' gdalUtils::ogrinfo(lagosusgis_path(), "hu12", so = TRUE)
 #'
 #' states   <- query_gis("state")
 #'
@@ -34,19 +32,34 @@
 #'
 #' # query multiple feature ids
 #' res <- query_gis("ws", "lagoslakeid", c(7010, 1))
+#'
+#' # query lake polygon from coordinates using extent argument
+#' lake_coordinates <- query_gis("LAGOS_US_All_Lakes_1ha_points",
+#'                               "lagoslakeid", "1")
+#'
+#' lake_polygon <- query_gis("LAGOS_US_All_Lakes_1ha",
+#'                           extent = sf::st_bbox(lake_coordinates))
 #' }
-query_gis <- function(layer, id_name = NULL, ids = NULL,
+query_gis <- function(layer, id_name = NULL, ids = NULL, extent = NA,
                                        crs = albers_conic(),
                                        gis_path = lagosusgis_path()){
 
   if(all(is.null(id_name), is.null(ids))){
-    res <- sf::st_read(gis_path, layer = layer)
+    if(!is.na(extent)){
+      wkt_filter <- st_as_sfc(extent, crs = albers_conic())
+      res <- st_read(gis_path, layer = layer,
+                         wkt_filter = st_as_text(wkt_filter))
+    }else{
+      res <- sf::st_read(gis_path, layer = layer)
+    }
   }else{
     res <- query_gis_(gis_path,
                query = paste0("SELECT * FROM ", layer,
                               " WHERE ", id_name, " IN ('",
                               paste0(ids,
-                                     collapse = "', '"), "')"), crs = crs)
+                                     collapse = "', '"), "')"),
+               extent = extent,
+               crs = crs)
 
     # sort items by ids
     res <- res[match(ids, data.frame(res[,id_name])[,id_name]),]
@@ -63,6 +76,7 @@ query_gis <- function(layer, id_name = NULL, ids = NULL,
 #'
 #' @param gis_path file path
 #' @param query SQL string
+#' @param extent apply an arbitrary extent using an sf bbox
 #' @param crs coordinate reference system string or epsg code
 #'
 #' @importFrom vapour vapour_read_geometry_text vapour_read_attributes
@@ -83,9 +97,16 @@ query_gis <- function(layer, id_name = NULL, ids = NULL,
 #' hu4s  <- query_gis("hu4", "hu4_huc4", c("0415", "0414"))
 #' hu8s  <- query_gis_(query = paste0("SELECT * FROM hu8 WHERE ",
 #'             paste0("hu8_huc8 LIKE '", hu4s$hu4_huc4, "%'", collapse = " OR ")))
+#'
+#' # query lake polygon from coordinates using extent argument
+#' lake_coordinates <- query_gis("LAGOS_US_All_Lakes_1ha_points",
+#'                               "lagoslakeid", "1")
+#' lake_polygon <- query_gis_(query = "SELECT * FROM LAGOS_US_All_Lakes_1ha",
+#'                            extent = sf::st_bbox(lake_coordinates))
 #' }
 #'
-query_gis_ <- function(gis_path = lagosusgis_path(), query, crs = albers_conic()){
+query_gis_ <- function(gis_path = lagosusgis_path(), query, extent = NA,
+                       crs = albers_conic()){
 
   # error if extent is not NA and query is defined?
 
@@ -104,12 +125,15 @@ query_gis_ <- function(gis_path = lagosusgis_path(), query, crs = albers_conic()
   # wkt <- vapour_read_geometry_text(gis_path, extent = e, sql = "SELECT * FROM IWS")
   # need to be able to set extent on vapour_read_attributes
 
+
   ###
-  dat <- as.data.frame(vapour_read_attributes(gis_path, sql = query),
+  dat <- as.data.frame(vapour_read_attributes(gis_path, sql = query,
+                                              extent = extent),
                        stringsAsFactors = FALSE)
   dat <- dplyr::mutate(dat,
                          wkt = vapour_read_geometry_text(
-                           gis_path, sql = query, textformat = "wkt"))
+                           gis_path, sql = query, extent = extent,
+                           textformat = "wkt"))
   sf::st_geometry(dat) <- sf::st_as_sfc(dat$wkt)
   dat                  <- dplyr::select(dat, -.data$wkt)
   sf::st_crs(dat)      <- sf::st_crs(crs)
