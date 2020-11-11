@@ -17,8 +17,7 @@ Imports:
     stringi,
     gh,
     purrr,
-    base64enc,
-    LAGOSUS
+    base64enc
 Remotes: hypertidy/vapour, JoshOBrien/gdalUtilities
 Depends: R (>= 3.4), LAGOSUS
 BugReports: https://github.com/jsta/LAGOSUSgis/issues
