@@ -9,3 +9,17 @@ lagosusgis_path()
 \description{
 Get the path to LAGOSUSgis data
 }
+\examples{
+\dontrun{
+# use defaults
+lagosusgis_path()
+
+# custom setting
+Sys.setenv(LAGOSUSGIS_PATH = "test.gpkg")
+lagosusgis_path()
+
+# revert to defaults
+Sys.setenv(LAGOSUSGIS_PATH = "")
+lagosusgis_path()
+}
+}

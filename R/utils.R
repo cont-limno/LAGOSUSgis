@@ -6,8 +6,32 @@ albers_conic <- function(){
 #' Get the path to LAGOSUSgis data
 #'
 #' @export
+#'
+#' @examples \dontrun{
+#' # use defaults
+#' lagosusgis_path()
+#'
+#' # custom setting
+#' Sys.setenv(LAGOSUSGIS_PATH = "test.gpkg")
+#' lagosusgis_path()
+#'
+#' # revert to defaults
+#' Sys.setenv(LAGOSUSGIS_PATH = "")
+#' lagosusgis_path()
+#' }
 lagosusgis_path <- function(){
-  file.path(rappdirs::user_data_dir("LAGOS-GIS"), "LAGOS_US_GIS_Data_v0.7.gdb")
+  res_default <- file.path(
+    rappdirs::user_data_dir("LAGOS-GIS"), "LAGOS_US_GIS_Data_v0.7.gdb")
+
+  env_vars <- Sys.getenv("LAGOSUSGIS_PATH")
+
+  if (any(!env_vars == "")) {
+    res <- env_vars
+  }else{
+    res <- res_default
+  }
+
+  res
 }
 
 lagosusgis_dir <- function(){
