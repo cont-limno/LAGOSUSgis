@@ -125,6 +125,10 @@ query_gis_ <- function(gis_path = lagosusgis_path(), query, extent = NA,
   # wkt <- vapour_read_geometry_text(gis_path, extent = e, sql = "SELECT * FROM IWS")
   # need to be able to set extent on vapour_read_attributes
 
+  if(!file.exists(gis_path) & !dir.exists(gis_path)){
+  stop(paste0("Data not available at the path pointed to by lagosusgis_path():\n  '",
+                lagosusgis_path(), "'"))
+  }
 
   ###
   dat <- as.data.frame(vapour_read_attributes(gis_path, sql = query,
