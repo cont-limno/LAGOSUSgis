@@ -15,7 +15,8 @@ Get the path to LAGOSUSgis data
 lagosusgis_path()
 
 # custom setting
-Sys.setenv(LAGOSUSGIS_PATH = "test.gpkg")
+Sys.setenv(
+LAGOSUSGIS_PATH = path.expand("~/.local/share/LAGOS-GIS/gis_locus_v1.0.gpkg"))
 lagosusgis_path()
 
 # revert to defaults
