@@ -8,7 +8,7 @@ query_gis(
   layer,
   id_name = NULL,
   ids = NULL,
-  extent = NA,
+  extent = character(0),
   crs = albers_conic(),
   gis_path = lagosusgis_path()
 )

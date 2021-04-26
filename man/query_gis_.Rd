@@ -7,7 +7,7 @@
 query_gis_(
   gis_path = lagosusgis_path(),
   query,
-  extent = NA,
+  extent = character(0),
   crs = albers_conic()
 )
 }

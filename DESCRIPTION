@@ -5,7 +5,6 @@ Authors@R: person("Joseph", "Stachelek", role = c("aut", "cre"),
  email = "stachel2@msu.edu")
 Description: Extra Functions to Supplement LAGOSUS.
 Imports: 
-    vapour (>= 0.2.0),
     sf, 
     dplyr, 
     memoise, 
@@ -18,7 +17,7 @@ Imports:
     gh,
     purrr,
     base64enc
-Remotes: hypertidy/vapour, JoshOBrien/gdalUtilities
+Remotes: JoshOBrien/gdalUtilities
 Depends: R (>= 3.4), LAGOSUS
 BugReports: https://github.com/jsta/LAGOSUSgis/issues
 URL: https://github.com/jsta/LAGOSUSgis

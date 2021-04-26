@@ -7,7 +7,7 @@
 #' @param crs character projection info defaults to lagosusgis_path()
 #' @param gis_path character path to LAGOSUS GIS gpkg
 #'
-#' @importFrom sf st_geometry st_geometry_type st_cast
+#' @importFrom sf st_geometry st_geometry_type st_cast st_read st_as_text
 #' @importFrom memoise memoise
 #' @export
 #'
@@ -40,15 +40,15 @@
 #' lake_polygon <- query_gis("LAGOS_US_All_Lakes_1ha",
 #'                           extent = sf::st_bbox(lake_coordinates))
 #' }
-query_gis <- function(layer, id_name = NULL, ids = NULL, extent = NA,
+query_gis <- function(layer, id_name = NULL, ids = NULL, extent = character(0),
                                        crs = albers_conic(),
                                        gis_path = lagosusgis_path()){
 
   if(all(is.null(id_name), is.null(ids))){
-    if(!is.na(extent)){
-      wkt_filter <- st_as_sfc(extent, crs = albers_conic())
-      res <- st_read(gis_path, layer = layer,
-                         wkt_filter = st_as_text(wkt_filter))
+    if(length(extent) > 0){
+      wkt_filter <- sf::st_as_sfc(extent, crs = albers_conic())
+      res <- sf::st_read(gis_path, layer = layer,
+                         wkt_filter = sf::st_as_text(wkt_filter), quiet = TRUE)
     }else{
       res <- sf::st_read(gis_path, layer = layer, quiet = TRUE)
     }
@@ -79,7 +79,6 @@ query_gis <- function(layer, id_name = NULL, ids = NULL, extent = NA,
 #' @param extent apply an arbitrary extent using an sf bbox
 #' @param crs coordinate reference system string or epsg code
 #'
-#' @importFrom vapour vapour_read_geometry_text vapour_read_attributes
 #' @importFrom dplyr mutate select
 #' @importFrom sf st_as_sfc st_crs st_geometry st_zm
 #' @importFrom rlang .data
@@ -105,25 +104,16 @@ query_gis <- function(layer, id_name = NULL, ids = NULL, extent = NA,
 #'                            extent = sf::st_bbox(lake_coordinates))
 #' }
 #'
-query_gis_ <- function(gis_path = lagosusgis_path(), query, extent = NA,
+query_gis_ <- function(gis_path = lagosusgis_path(), query, extent = character(0),
                        crs = albers_conic()){
 
   # error if extent is not NA and query is defined?
 
   # investigate specific layers
   # library(sf)
-  # library(vapour)
   # crs <- LAGOSUSgis:::albers_conic()
   # gis_path <- path.expand("~/.local/share/LAGOS-GIS/LAGOS_US_GIS_Data_v0.7.gdb")
   # sf::st_layers(gis_path)
-  # query <- "SELECT * FROM hu4 LIMIT 1"
-  # as.data.frame(vapour_read_attributes(gis_path, sql = query),
-  #                      stringsAsFactors = FALSE)
-
-  # investigate extent argument
-  # e <- as.numeric(st_bbox(dat))[c(1, 3, 2, 4)]
-  # wkt <- vapour_read_geometry_text(gis_path, extent = e, sql = "SELECT * FROM IWS")
-  # need to be able to set extent on vapour_read_attributes
 
   if(!file.exists(gis_path) & !dir.exists(gis_path)){
   stop(paste0("Data not available at the path pointed to by lagosusgis_path():\n  '",
@@ -131,20 +121,16 @@ query_gis_ <- function(gis_path = lagosusgis_path(), query, extent = NA,
   }
 
   ###
-  dat <- as.data.frame(
-    vapour_read_attributes(gis_path, sql = query, extent = extent),
-                       stringsAsFactors = FALSE)
-  dat <- dplyr::mutate(dat,
-                         wkt = vapour_read_geometry_text(
-                           gis_path, sql = query, extent = extent,
-                           textformat = "wkt"))
-  sf::st_geometry(dat) <- sf::st_as_sfc(dat$wkt)
-  dat                  <- dplyr::select(dat, -.data$wkt)
-  sf::st_crs(dat)      <- sf::st_crs(crs)
+  layer <- stringr::str_extract(query, "(?<=FROM )(.*)(?= WHERE)")
+  dat <- sf::st_read(gis_path, layer = layer, query = query,
+                     wkt_filter = sf::st_as_text(sf::st_as_sfc(extent)),
+                     quiet = TRUE)
 
-  if(any(unique(sf::st_geometry_type(sf::st_geometry(dat))) == "MULTISURFACE")){
-    dat <- sf::st_cast(dat, "MULTIPOLYGON")
-  }
+  # sf::st_crs(dat)      <- sf::st_crs(crs)
+  #
+  # if(any(unique(sf::st_geometry_type(sf::st_geometry(dat))) == "MULTISURFACE")){
+  #   dat <- sf::st_cast(dat, "MULTIPOLYGON")
+  # }
 
   sf::st_zm(dat)
 }
