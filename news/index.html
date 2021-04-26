@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • LAGOSUSgis</title>
+<title>Changelog • LAGOSUSgis</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -58,7 +58,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -120,82 +120,34 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/jsta/LAGOSUSgis/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <table class="ref-index">
-
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="gh_file.html">gh_file()</a></code> </p>
-        </td>
-        <td><p>Gets a file from a github repo, using the Data API blob endpoint</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gis_34352.html">gis_34352</a></code> </p>
-        </td>
-        <td><p>List of sf objects corresponding to lagoslakeid 34352</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="lagosnegis_get.html">lagosnegis_get()</a></code> </p>
-        </td>
-        <td><p>Get LAGOSNEgis data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="lagosusgis_path.html">lagosusgis_path()</a></code> </p>
-        </td>
-        <td><p>Get the path to LAGOSUSgis data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="query_gis.html">query_gis()</a></code> </p>
-        </td>
-        <td><p>Query LAGOS GIS</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="query_gis_.html">query_gis_()</a></code> </p>
-        </td>
-        <td><p>Raw (non-vectorized) query of LAGOS GIS</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="query_lake_poly.html">query_lake_poly()</a></code> </p>
-        </td>
-        <td><p>Query polygon outline for LAGOS lakes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="query_wbd.html">query_wbd()</a></code> </p>
-        </td>
-        <td><p>Query watershed boundary for LAGOS lakes</p></td>
-      </tr>
-    </tbody>
-    </table>
+    <div id="lagosusgis-012" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.2">
+<a href="#lagosusgis-012" class="anchor"></a>LAGOSUSgis 0.1.2</h1>
+<ul>
+<li>Convert internal use of the <code>vapour</code> package to use <code>sf</code> <code>query</code> and <code>wkt_filter</code>
+</li>
+</ul>
+</div>
+    <div id="lagosusgis-011" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.1">
+<a href="#lagosusgis-011" class="anchor"></a>LAGOSUSgis 0.1.1</h1>
+<ul>
+<li>Version bump for GIS module v0.7</li>
+</ul>
+</div>
+    <div id="lagosusgis-010" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.0">
+<a href="#lagosusgis-010" class="anchor"></a>LAGOSUSgis 0.1.0</h1>
+<ul>
+<li>Initial release for GIS module v0.6</li>
+</ul>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -203,6 +155,7 @@
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
