@@ -50,7 +50,7 @@ query_gis <- function(layer, id_name = NULL, ids = NULL, extent = NA,
       res <- st_read(gis_path, layer = layer,
                          wkt_filter = st_as_text(wkt_filter))
     }else{
-      res <- sf::st_read(gis_path, layer = layer)
+      res <- sf::st_read(gis_path, layer = layer, quiet = TRUE)
     }
   }else{
     res <- query_gis_(gis_path,
@@ -114,8 +114,8 @@ query_gis_ <- function(gis_path = lagosusgis_path(), query, extent = NA,
   # library(sf)
   # library(vapour)
   # crs <- LAGOSUSgis:::albers_conic()
-  # gis_path <- "/home/jose/.local/share/LAGOS-GIS/lagos-ne_gis.gpkg"
-  # st_layers(gis_path)
+  # gis_path <- path.expand("~/.local/share/LAGOS-GIS/LAGOS_US_GIS_Data_v0.7.gdb")
+  # sf::st_layers(gis_path)
   # query <- "SELECT * FROM hu4 LIMIT 1"
   # as.data.frame(vapour_read_attributes(gis_path, sql = query),
   #                      stringsAsFactors = FALSE)
@@ -131,8 +131,8 @@ query_gis_ <- function(gis_path = lagosusgis_path(), query, extent = NA,
   }
 
   ###
-  dat <- as.data.frame(vapour_read_attributes(gis_path, sql = query,
-                                              extent = extent),
+  dat <- as.data.frame(
+    vapour_read_attributes(gis_path, sql = query, extent = extent),
                        stringsAsFactors = FALSE)
   dat <- dplyr::mutate(dat,
                          wkt = vapour_read_geometry_text(
