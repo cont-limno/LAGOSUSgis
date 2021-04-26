@@ -1,5 +1,4 @@
 test_that("query works", {
-
   expect_s3_class(
     query_gis("state"),
     "data.frame"
@@ -30,3 +29,9 @@ test_that("query works with extent info", {
   )
 })
 
+test_that("query_ works", {
+  expect_s3_class(
+    query_gis_(query = "SELECT * FROM ws WHERE lagoslakeid IN ('7010')"),
+    "data.frame"
+  )
+})
