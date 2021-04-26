@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 
 # LAGOSUSgis
 
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![CRAN status](https://www.r-pkg.org/badges/version/LAGOSUSgis)](https://cran.r-project.org/package=LAGOSUSgis) [![Travis build status](https://travis-ci.org/cont-limno/LAGOSUSgis.svg?branch=master)](https://travis-ci.org/cont-limno/LAGOSUSgis) [![DOI](https://zenodo.org/badge/106293356.svg)](https://zenodo.org/badge/latestdoi/106293356)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![CRAN status](https://www.r-pkg.org/badges/version/LAGOSUSgis)](https://cran.r-project.org/package=LAGOSUSgis) [![DOI](https://zenodo.org/badge/106293356.svg)](https://zenodo.org/badge/latestdoi/106293356)
 
 
 
