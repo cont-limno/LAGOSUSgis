@@ -45,14 +45,14 @@ query_gis <- function(layer, id_name = NULL, ids = NULL, extent = character(0),
                       gis_path = lagosusgis_path()) {
 
   if (all(is.null(id_name), is.null(ids))) {
-    if (length(extent) > 0) {
+    if (length(extent) > 0) { # extract by extent (bbox)
       wkt_filter <- sf::st_as_sfc(extent, crs = albers_conic())
       res <- sf::st_read(gis_path, layer = layer,
         wkt_filter = sf::st_as_text(wkt_filter), quiet = TRUE)
-    } else {
+    } else { # load entire layer
       res <- sf::st_read(gis_path, layer = layer, quiet = TRUE)
     }
-  } else {
+  } else { # load specific ids from specific layer
     res <- query_gis_(gis_path,
       query = paste0("SELECT * FROM ", layer,
         " WHERE ", id_name, " IN ('",
