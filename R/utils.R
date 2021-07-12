@@ -22,7 +22,7 @@ albers_conic <- function() {
 #' }
 lagosusgis_path <- function() {
   res_default <- file.path(
-    rappdirs::user_data_dir("LAGOS-GIS"), "LAGOS_US_GIS_Data_v0.7.gdb")
+    rappdirs::user_data_dir("LAGOS-GIS"), "LAGOS_US_GIS_Data_v0.9.gdb")
 
   env_vars <- Sys.getenv("LAGOSUSGIS_PATH")
 

@@ -1,3 +1,7 @@
+# LAGOSUSgis 0.1.x
+
+* Version bump for GIS module v0.9
+
 # LAGOSUSgis 0.1.2
 
 * Convert internal use of the `vapour` package to use `sf` `query` and `wkt_filter`
