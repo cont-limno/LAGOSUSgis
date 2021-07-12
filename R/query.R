@@ -122,7 +122,7 @@ query_gis_ <- function(gis_path = lagosusgis_path(), query, extent = character(0
 
   ###
   layer <- stringr::str_extract(query, "(?<=FROM )(.*)(?= WHERE)")
-  dat <- sf::st_read(gis_path, layer = layer, query = query,
+  dat <- sf::st_read(gis_path, query = query,
     wkt_filter = sf::st_as_text(sf::st_as_sfc(extent)),
     quiet = TRUE)
 
