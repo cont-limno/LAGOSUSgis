@@ -34,13 +34,13 @@ hu8s <- query_gis_(query = "SELECT * FROM hu8 WHERE hu8_huc8 LIKE '0415\%'")
 # query multiple nested hucs
 hu4s  <- query_gis("hu4", "hu4_huc4", c("0415", "0414"))
 hu8s  <- query_gis_(query = paste0("SELECT * FROM hu8 WHERE ",
-            paste0("hu8_huc8 LIKE '", hu4s$hu4_huc4, "\%'", collapse = " OR ")))
+  paste0("hu8_huc8 LIKE '", hu4s$hu4_huc4, "\%'", collapse = " OR ")))
 
 # query lake polygon from coordinates using extent argument
 lake_coordinates <- query_gis("LAGOS_US_All_Lakes_1ha_points",
-                              "lagoslakeid", "1")
+  "lagoslakeid", "1")
 lake_polygon <- query_gis_(query = "SELECT * FROM LAGOS_US_All_Lakes_1ha",
-                           extent = sf::st_bbox(lake_coordinates))
+  extent = sf::st_bbox(lake_coordinates))
 }
 
 }

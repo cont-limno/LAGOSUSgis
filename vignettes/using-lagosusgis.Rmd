@@ -1,6 +1,6 @@
 ---
 title: "Using LAGOSUSgis"
-author: "Joseph Stachelek"
+author: "Jemma Stachelek"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -25,9 +25,9 @@ res_iws  <- query_gis("ws", "lagoslakeid", c(34352))
 res_lake <- query_gis("LAGOS_US_All_Lakes_1ha", "lagoslakeid", 34352)
 res_pnt  <- query_gis("LAGOS_US_All_Lakes_1ha_POINTS", "lagoslakeid", 34352)
 
-ggplot() + 
-  geom_sf(data = res_iws, color = "darkgreen") + 
-  geom_sf(data = res_lake, color = "yellow") + 
+ggplot() +
+  geom_sf(data = res_iws, color = "darkgreen") +
+  geom_sf(data = res_lake, color = "yellow") +
   geom_sf(data = res_pnt, color = "blue")
 ```
 
@@ -36,8 +36,8 @@ library(LAGOSUSgis)
 library(sf)
 library(ggplot2)
 
-ggplot() + 
-  geom_sf(data = gis_34352$res_iws, color = "darkgreen") + 
-  geom_sf(data = gis_34352$res_lake, color = "yellow") + 
+ggplot() +
+  geom_sf(data = gis_34352$res_iws, color = "darkgreen") +
+  geom_sf(data = gis_34352$res_lake, color = "yellow") +
   geom_sf(data = gis_34352$res_pnt, color = "blue")
 ```

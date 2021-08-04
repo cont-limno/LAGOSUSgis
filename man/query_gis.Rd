@@ -54,9 +54,9 @@ res <- query_gis("ws", "lagoslakeid", c(7010, 1))
 
 # query lake polygon from coordinates using extent argument
 lake_coordinates <- query_gis("LAGOS_US_All_Lakes_1ha_points",
-                              "lagoslakeid", "1")
+  "lagoslakeid", "1")
 
 lake_polygon <- query_gis("LAGOS_US_All_Lakes_1ha",
-                          extent = sf::st_bbox(lake_coordinates))
+  extent = sf::st_bbox(lake_coordinates))
 }
 }

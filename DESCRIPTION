@@ -1,7 +1,7 @@
 Package: LAGOSUSgis
 Title: Extra functions to interact with the GIS module of LAGOSUS
 Version: 0.1.2
-Authors@R: person("Joseph", "Stachelek", role = c("aut", "cre"), 
+Authors@R: person("Jemma", "Stachelek", role = c("aut", "cre"), 
  email = "stachel2@msu.edu")
 Description: Extra Functions to Supplement LAGOSUS.
 Imports: 
